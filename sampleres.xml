@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<resume>
+	<info>
+		<name>FirstName SurName</name>
+		<contact>Email@somewhere.com</contact>
+		<phone>555-555-5555</phone>
+	</info>
+
+	<!--itemlist>
+		<title>Objective</title>
+		<item>To get a job, type, location, fit into career, etc.</item>
+	</itemlist-->
+
+<skills>
+	<title>Skillset</title>
+	<!-- Each group has a title and a list of items. -->
+	<!-- Any element can have a "keys" attribute. The element and its
+	children will be included if the key is present when the resume is reduced
+	during pre-processing. -->
+	<subgroup>
+		<title>Professional</title>
+		<item keys="team,all">Team lead</item>
+		<item keys="team,management,all">Engineering Team Management</item>
+		<item keys="team,design,all">Systems Design and Implementation</item>
+	</subgroup>
+
+	<subgroup>
+		<title>Programming</title>
+		<item keys="c,code,all">C for embedded, back-end, and tools.</item>
+		<item keys="perl,ruby,all">Experience with perl, php, and ruby; as toolkits.</item>
+	</subgroup>
+
+	<subgroup>
+		<!-- Note that less desirable elements can be excluded from "all". -->
+		<title>Operating Systems</title>
+		<item keys="unix,linux,all">Linux experience beginning in 1995 and ongoing.</item>
+		<item keys="unix,solaris,development,sysadmin">5 years of Solaris experience, as a development, testing, and deployment platform.</item>
+		<item keys="windows">Used Windows 2000 and XP as development platforms.</item>
+	</subgroup>
+</skills>
+
+
+	<joblist>
+		<title>Work Experience</title>
+		<job>
+			<group>CompanyName</group>
+			<title>Title</title>
+			<timespan><years from="2016" to="2018"/></timespan>
+			<detail>
+				<jobitem keys="arch,all">Guided the organization to sanity.</jobitem>
+				<jobitem keys="management,arch">Extracted use-case detail from petulant children.</jobitem>
+			</detail>
+		</job>
+		<job>
+			<group>CompanyName</group>
+			<title>Title</title>
+			<timespan><years from="2014" to="2016"/></timespan>
+			<detail>
+				<jobitem>Drank Kool-Aid</jobitem>
+			</detail>
+		</job>
+		<job keys="old,retail">
+			<group>Service R Us</group>
+			<title>Technical Support and Retail Service</title>
+			<timespan><years from="1994" to="1998"/></timespan>
+			<detail>
+				<jobitem>Did customers bidding, sometimes for tips.</jobitem>
+			</detail>
+		</job>
+
+		<!--
+		<job>
+			<group>Really Old Formative Times</group>
+			<title>Partner</title>
+			<timespan><years from="1994" to="1997"/></timespan>
+			<detail>
+				<jobitem>Something for the memoir.</jobitem>
+			</detail>
+		</job>
+		-->
+	</joblist>
+
+<edlist>
+	<title>Formal Education</title>
+	<entity>
+		<institute>We R Great State</institute>
+		<timespan><year value="2003"/></timespan>
+		<achievement>Bachelor of Science<major>Computer Science</major><minor>Sociology</minor></achievement>
+
+		<courses>
+			<comment>Program included;</comment>
+			<grouping>Networking, Databases, Distributed Computing, Parallel Computing</grouping>
+			<grouping>Computer Architecture, Compiler Design, Operating System Design</grouping>
+			<grouping>Combinatorics, Computer Theory, Number Theory, Symbolic Computation</grouping>
+			<grouping>Data Structures, Software Engineering, Artificial Intelligence</grouping>
+			<!--<grouping>Micro Economics, International Relations, Physics.</grouping>-->
+		</courses>
+	</entity>
+</edlist>
+
+<portfolio keys="portfolio">
+	<title>Portfolio</title>
+	<comment>Please note that these are primarily academic and personal
+projects, as information about corporate work may be
+sensitive.</comment>
+	<portfolioItem keys="trivial,old">
+		<title>Minicc</title>
+		<detail>A complete compiler for a C-like language, including
+		basic optimizations and a frontend, backend division.  Built
+		for part of the compilers course.
+		</detail>
+	</portfolioItem>
+</portfolio>
+
+<community keys="community,all">
+	<title>Community Service</title>
+	<service keys="pledge">
+		<location>Service Place</location>
+		<item>Student representative on the External Accreditation Committee.</item>
+	</service>
+</community>
+
+</resume>
+
+

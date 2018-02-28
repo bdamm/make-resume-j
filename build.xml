@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+
+<!-- ======================================================================= -->
+<!-- Resume build file                                                       -->
+<!-- For Ant: http://jakarta.apache.org/ant/manual/index.html                -->
+<!-- Designed to work with Ant 1.5                                           -->
+<!-- ======================================================================= -->
+
+<project name="Resume" default="main" basedir=".">
+	
+	<property name="dest" value="classes" />
+	<property name="source" value="src" />
+	<property name="lib" value="lib" />
+
+	<target name="init">
+		<!-- might be stuff in here in the future -->
+		<uptodate property="resume.nochange" srcfile="myres.xml" targetfile="myres.keyed.xml" />
+	</target>
+
+	<target name="compile" depends="init">
+		<mkdir dir="${dest}" />
+		<javac srcdir="${source}" debug="on" destdir="${dest}" deprecation="on" >
+			<classpath refid="project.class.path"/>
+		</javac>
+	</target>
+
+	<target name="test" depends="init" unless="resume.nochange">
+		<echo message="CHANGED RESUME"/>
+	</target>
+
+	<target name="keys" depends="init,compile,test" unless="resume.nochange">
+		<java classname="net.bdamm.ResumeKeys">
+			<classpath refid="project.class.path"/>
+			<arg value="myres.xml"/>
+			<arg value="myres.keyed.xml"/>
+			<!-- KEYS ARE RIGHT HERE!  -->
+			<!-- start keys -->
+			<arg value="all" />
+			<arg value="security" />
+			<!--<arg value="identity" />-->
+			<arg value="unix" />
+			<arg value="management" />
+			<arg value="java" />
+			<arg value="arch" />
+			<arg value="team" />
+			<!-- end keys -->
+		</java>
+	</target>
+
+	<target name="transform" depends="init,keys">
+		<style in="myres.keyed.xml" out="myreslatex.tex" style="xml2latex.xsl" />
+		<style in="myres.keyed.xml" out="index.html" style="xml2frontpage.xsl" />
+		<style in="myres.keyed.xml" out="myres.html" style="xml2html.xsl" />
+	</target>
+
+	<path id="project.class.path">
+		<fileset dir="${lib}">
+			<include name="**/*.jar"/>
+		</fileset>
+		<pathelement path="classes"/>
+		<pathelement path="${java.class.path}"/>
+	</path>
+
+	<target name="latex" depends="init,transform">
+		<apply executable="latex" >
+			<fileset dir=".">
+				<include name="myreslatex.tex" />
+			</fileset>
+		</apply>
+	</target>
+
+	<target name="pdf" depends="init,transform,latex">
+		<apply executable="pdflatex" >
+			<arg value="-interaction"/>
+			<arg value="nonstopmode"/>
+			<fileset dir=".">
+				<include name="myreslatex.tex" />
+			</fileset>
+		</apply>
+
+		<copy file="myreslatex.pdf" tofile="myres.pdf" />
+	</target>
+
+	<target name="main" depends="init,transform,pdf">
+	</target>
+
+	<target name="clean" depends="init">
+		<delete dir="${dest}" />
+		<delete file="myres.keyed.xml" />
+		<delete file="myreslatex.dvi" />
+		<delete file="myreslatex.pdf" />
+		<delete file="myreslatex.log" />
+		<delete file="myreslatex.aux" />
+
+	</target>
+</project>
+
